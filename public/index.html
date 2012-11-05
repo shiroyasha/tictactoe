@@ -35,26 +35,51 @@
 
     <body>
         <div class='container'>
-            <div class='row'>
-                <div class='span12 center'>
-                    <canvas id='gameField' width=550px height=550px></canvas>
+
+            <h1 class='page-header'>Simple tic tac toe implementation<small> by Igor Šarčević</small></h1>
+
+            <ul class="nav nav-tabs" id="myTab">
+                <li class="active"><a href="#game" data-toggle="tab">Game</a></li>
+                <li><a href="#testing" data-toggle="tab">Testing</a></li>
+            </ul>
+
+            <div class="tab-content"> 
+
+                <!-- game tab -->
+
+                <div class="tab-pane active" id="game">
+                    <div class='row'>
+                        <div class='span12 center'>
+                            <canvas id='gameField' width=550px height=550px></canvas>
+                        </div>
+                    </div>
+
+                    <div class='row'>
+                        <div class='span12 center'>
+                            <input id='restartPlayerCompBtn' type='button' value='Player vs. Computer'/>
+                            <input id='restartCompPlayerBtn' type='button' value='Computer vs. Player'/>
+                            <input id='restartCompCompBtn' type='button' value='Computer vs. Computer'/>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- testing tab -->
+
+                <div class="tab-pane" id="testing">
+                    testing
+                </div>
+
             </div>
 
-            <div class='row'>
-                <div class='span12 center'>
-                    <input id='restartPlayerCompBtn' type='button' value='Player vs. Computer'/>
-                    <input id='restartCompPlayerBtn' type='button' value='Computer vs. Player'/>
-                    <input id='restartCompCompBtn' type='button' value='Computer vs. Computer'/>
-                </div>
-            </div>
+
+
 
             <div id="footer">
                 <hr />
                 <div class='row'>
                     <div class='span12 center'>
                         <p>Designed and built by Igor Šarčević</p>
-                        <p>Project source can be found on <a href='https://github.com/shiroyasha/HRC'>GitHub</a> containing its documentation.</p>
+                        <p>Project source can be found on <a href='https://github.com/shiroyasha/tictactoe'>GitHub</a> containing its documentation.</p>
                         <p>Code is licenced under <a href='http://www.apache.org/licenses/LICENSE-2.0'>Apache Commons 2.0</a> &amp the documentation under <a href='http://creativecommons.org/licenses/by/3.0/'>CC 3.0</a></p>
                     </div>
                 </div>
