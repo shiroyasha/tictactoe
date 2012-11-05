@@ -1,0 +1,33 @@
+
+#area,#area2, #trainArea {
+    background-image: url('../img/grid.png');
+}
+
+#area, #trainArea {
+    cursor: crosshair;
+}
+
+#area:active, #trainArea:active { 
+    cursor: crosshair;
+}
+
+.center {
+    text-align: center;
+    position: relative;
+}
+
+.buttons .btn {
+    float:right;
+
+    margin-left: 10px;
+}
+
+hr {
+    margin-top: 100px;
+}
+
+h1.page-header {
+    display: inline-block;
+}
+
+

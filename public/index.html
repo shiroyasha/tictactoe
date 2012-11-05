@@ -1,0 +1,65 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <meta http-equiv="content-type" content="text-html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type='text/css' />
+        <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" type='text/css' />
+        <link rel="stylesheet" href="css/style.css" type='text/css' />
+
+        <script src='js/jquery.js'></script>
+        <script src='js/imgpreload.js'></script>
+        <script src='js/rad.js'></script>
+
+        <script language='javascript'>
+            $( function() {
+                startGame();
+            });
+        </script>
+
+        <style>
+
+            #gameField {
+                display: inline-block;
+                background-image: url('img/table.png') ;
+                width: 550px;
+                height: 550px;
+                margin: 10px;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div class='container'>
+            <div class='row'>
+                <div class='span12 center'>
+                    <canvas id='gameField' width=550px height=550px></canvas>
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='span12 center'>
+                    <input id='restartPlayerCompBtn' type='button' value='Player vs. Computer'/>
+                    <input id='restartCompPlayerBtn' type='button' value='Computer vs. Player'/>
+                    <input id='restartCompCompBtn' type='button' value='Computer vs. Computer'/>
+                </div>
+            </div>
+
+            <div id="footer">
+                <hr />
+                <div class='row'>
+                    <div class='span12 center'>
+                        <p>Designed and built by Igor Šarčević</p>
+                        <p>Project source can be found on <a href='https://github.com/shiroyasha/HRC'>GitHub</a> containing its documentation.</p>
+                        <p>Code is licenced under <a href='http://www.apache.org/licenses/LICENSE-2.0'>Apache Commons 2.0</a> &amp the documentation under <a href='http://creativecommons.org/licenses/by/3.0/'>CC 3.0</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>
