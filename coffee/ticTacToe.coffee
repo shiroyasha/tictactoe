@@ -59,9 +59,10 @@ class TicTacToeGame extends Game
         @setPlayer player
         super new TicTacToeRules()
         @ddd = false
+        @maxDepth = 20
 
     play: (state) ->
-        @generateMove( state, @heuristic )
+        @generateMove( state, @heuristic, @maxDepth)
 
     setPlayer: (@player) ->
         @opponent = if @player is 0 then 1 else 0

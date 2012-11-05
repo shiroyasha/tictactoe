@@ -37,7 +37,6 @@ class Game
     constructor: (@rules) ->
 
 
-
     ###
         generates the move using minimax algorithm
         - state is an object that contains information about game state 

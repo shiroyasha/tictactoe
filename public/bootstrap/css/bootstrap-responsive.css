@@ -1,5 +1,144 @@
 /*!
- * Bootstrap Responsive v2.1.0
+ * Jasny Bootstrap Responsive Extensions j2
+ *
+ * Copyright 2012 Jasny BV
+ * Licensed under the Apache License v2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Extended with pride by @ArnoldDaniels of jasny.net
+ */
+
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.hide-text {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.input-block-level {
+  display: block;
+  width: 100%;
+  min-height: 30px;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.container-semifluid {
+  max-width: 1170px;
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .row-desktop.row-fluid {
+    width: 100%;
+  }
+  .row-desktop.row {
+    margin-left: 0;
+  }
+  .row-desktop > [class*="span"],
+  .row-desktop > [class*="span"] {
+    display: block;
+    float: none;
+    width: auto;
+    margin: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-horizontal .controls,
+  .form-horizontal .well .controls,
+  .small-labels .controls {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .form-horizontal .form-actions {
+    padding-left: 18px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  .form-horizontal .control-label {
+    width: 100px;
+  }
+  .form-horizontal .controls {
+    margin-left: 110px;
+  }
+  .form-horizontal .form-actions {
+    padding-left: 110px;
+  }
+  .form-horizontal .well .control-label {
+    width: 80px;
+  }
+  .form-horizontal .well .controls {
+    margin-left: 90px;
+  }
+  .small-labels .control-group > label {
+    width: 50px;
+  }
+  .small-labels .controls {
+    margin-left: 60px;
+  }
+  .small-labels .form-actions {
+    padding-left: 60px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .small-labels .control-group > label {
+    width: 80px;
+  }
+  .small-labels .controls {
+    margin-left: 100px;
+  }
+  .small-labels .form-actions {
+    padding-left: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-alert {
+    position: static;
+    width: auto;
+  }
+  .page-alert .alert {
+    width: auto;
+    margin-left: 0;
+    border-top-width: 1px;
+    -webkit-border-radius: 4px;
+       -moz-border-radius: 4px;
+            border-radius: 4px;
+  }
+  body > .page-alert {
+    position: static;
+  }
+}
+
+@media (min-width: 1200px) {
+  .page-alert .alert {
+    width: 700px;
+    margin-left: -375px;
+  }
+}
+/*!
+ * Bootstrap Responsive v2.1.1
  *
  * Copyright 2012 Twitter, Inc
  * Licensed under the Apache License v2.0
@@ -107,6 +246,7 @@
   }
   [class*="span"] {
     float: left;
+    min-height: 1px;
     margin-left: 30px;
   }
   .container,
@@ -453,6 +593,7 @@
   }
   [class*="span"] {
     float: left;
+    min-height: 1px;
     margin-left: 20px;
   }
   .container,
@@ -780,7 +921,8 @@
     padding-left: 20px;
   }
   .navbar-fixed-top,
-  .navbar-fixed-bottom {
+  .navbar-fixed-bottom,
+  .navbar-static-top {
     margin-right: -20px;
     margin-left: -20px;
   }
@@ -814,8 +956,11 @@
   .row-fluid [class*="span"] {
     display: block;
     float: none;
-    width: auto;
+    width: 100%;
     margin-left: 0;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
   }
   .span12,
   .row-fluid .span12 {
@@ -845,6 +990,9 @@
     display: inline-block;
     width: auto;
   }
+  .controls-row [class*="span"] + [class*="span"] {
+    margin-left: 0;
+  }
   .modal {
     position: fixed;
     top: 20px;
@@ -870,7 +1018,7 @@
   input[type="radio"] {
     border: 1px solid #ccc;
   }
-  .form-horizontal .control-group > label {
+  .form-horizontal .control-label {
     float: none;
     width: auto;
     padding-top: 0;
@@ -944,14 +1092,14 @@
     display: none;
   }
   .nav-collapse .nav .nav-header {
-    color: #555555;
+    color: #777777;
     text-shadow: none;
   }
   .nav-collapse .nav > li > a,
   .nav-collapse .dropdown-menu a {
     padding: 9px 15px;
     font-weight: bold;
-    color: #555555;
+    color: #777777;
     -webkit-border-radius: 3px;
        -moz-border-radius: 3px;
             border-radius: 3px;
@@ -1003,6 +1151,10 @@
   .nav-collapse .dropdown-menu .divider {
     display: none;
   }
+  .nav-collapse .nav > li > .dropdown-menu:before,
+  .nav-collapse .nav > li > .dropdown-menu:after {
+    display: none;
+  }
   .nav-collapse .navbar-form,
   .nav-collapse .navbar-search {
     float: none;
@@ -1013,6 +1165,11 @@
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
        -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
             box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  .navbar-inverse .nav-collapse .navbar-form,
+  .navbar-inverse .nav-collapse .navbar-search {
+    border-top-color: #111111;
+    border-bottom-color: #111111;
   }
   .navbar .nav-collapse .nav.pull-right {
     float: none;

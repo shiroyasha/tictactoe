@@ -9,7 +9,7 @@
 
 
 (function() {
-  var DEBUG, Game, GameRules, MODES, POSITIONS, TicTacToeGame, TicTacToeRules, TicTacToeView, ispis,
+  var DEBUG, Game, GameRules, MODES, POSITIONS, TicTacToeGame, TicTacToeRules, TicTacToeTesting, TicTacToeView, ispis,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
@@ -240,10 +240,11 @@
       this.setPlayer(player);
       TicTacToeGame.__super__.constructor.call(this, new TicTacToeRules());
       this.ddd = false;
+      this.maxDepth = 20;
     }
 
     TicTacToeGame.prototype.play = function(state) {
-      return this.generateMove(state, this.heuristic);
+      return this.generateMove(state, this.heuristic, this.maxDepth);
     };
 
     TicTacToeGame.prototype.setPlayer = function(player) {
@@ -377,7 +378,7 @@
         callback = function() {
           return _this.makeMove(game.play(_this.state));
         };
-        return this.moveTimer = setTimeout(callback, 1000);
+        return this.moveTimer = setTimeout(callback, 500);
       }
     };
 
@@ -405,6 +406,14 @@
       }
     };
 
+    TicTacToeView.prototype.draw = function(player, field) {
+      var img, x, y;
+      img = player === 0 ? this.images.x : this.images.o;
+      x = POSITIONS[field][0];
+      y = POSITIONS[field][1];
+      return this.ctx.drawImage(img, 0, 0, 150, 150, x, y, 150, 150);
+    };
+
     TicTacToeView.prototype.onClick = function(ev) {
       var i, x, y, _i, _ref;
       if (this.mode === MODES.player_vs_comp && this.state.player === 1) {
@@ -430,11 +439,98 @@
 
   })();
 
+  TicTacToeTesting = (function() {
+
+    function TicTacToeTesting(id, images) {
+      var _this = this;
+      this.id = id;
+      this.images = images;
+      this.ctx = document.getElementById(this.id).getContext('2d');
+      $('#' + this.id).click(function(ev) {
+        return _this.onClick(ev);
+      });
+      this.state = {
+        board: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+        player: 0
+      };
+      $('#calculate').click(function(ev) {
+        return _this.test();
+      });
+      $('#clearField').click(function(ev) {
+        _this.ctx.clearRect(0, 0, 550, 550);
+        return _this.state = {
+          board: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+          player: 0
+        };
+      });
+    }
+
+    TicTacToeTesting.prototype.makeMove = function(i) {
+      var which;
+      if (this.state.board[i] !== 2) {
+        which = 2;
+      } else {
+        which = $('#drawingRadiosX').attr('checked') != null ? 0 : 1;
+      }
+      this.state.board[i] = which;
+      return this.draw(which, i);
+    };
+
+    TicTacToeTesting.prototype.draw = function(player, field) {
+      var img, x, y;
+      console.log('tu', player, field);
+      img = player === 0 ? this.images.x : this.images.o;
+      x = POSITIONS[field][0];
+      y = POSITIONS[field][1];
+      if (player === 2) {
+        return this.ctx.clearRect(x, y, 150, 150);
+      } else {
+        return this.ctx.drawImage(img, 0, 0, 150, 150, x, y, 150, 150);
+      }
+    };
+
+    TicTacToeTesting.prototype.onClick = function(ev) {
+      var i, x, y, _i, _ref;
+      x = ev.pageX - $('#' + this.id).offset().left;
+      y = ev.pageY - $('#' + this.id).offset().top;
+      for (i = _i = 0, _ref = POSITIONS.length - 1; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        if ((POSITIONS[i][0] <= x && x <= POSITIONS[i][0] + 150) && (POSITIONS[i][1] <= y && y <= POSITIONS[i][1] + 150)) {
+          this.makeMove(i);
+          return;
+        }
+      }
+    };
+
+    TicTacToeTesting.prototype.test = function() {
+      var heuristic, move, rez, temp, terminal;
+      $('#testResults').html("");
+      temp = game.player;
+      if ($('#maxDepth').attr('value').length > 0) {
+        console.log('menjam dubinu');
+        game.maxDepth = parseInt($('#maxDepth').attr('value'));
+      }
+      game.setPlayer($('#optionsRadiosX').attr('checked') != null ? 0 : 1);
+      this.state.player = game.player;
+      console.log(game.player);
+      terminal = game.rules.terminalTest(this.state);
+      heuristic = game.heuristic(this.state);
+      move = game.play(this.state);
+      rez = "<p>terminal state: " + (terminal ? "<b>yes</b>" : "<b>no</b>") + "</p>";
+      rez += "<p>heuristic: " + heuristic + "</p>";
+      rez += "<p>best move for " + (game.player === 0 ? 'x' : 'o') + ": " + move + "</p>";
+      $('#testResults').html(rez);
+      return game.setPlayer(temp);
+    };
+
+    return TicTacToeTesting;
+
+  })();
+
   window.startGame = function() {
     var to_load;
     to_load = ['img/x.png', 'img/o.png', 'img/horizontal.png', 'img/vertical.png', 'img/main_diagonal.png', 'img/minor_diagonal.png'];
     return imgpreload(to_load, function(images) {
-      var rez, view;
+      var removeButtonClasses, rez, testing, view;
       rez = {
         x: images[0],
         o: images[1],
@@ -445,14 +541,27 @@
       };
       view = new TicTacToeView('gameField', rez);
       view.restart(MODES.comp_vs_player);
+      testing = new TicTacToeTesting('testingField', rez);
+      $('#restartCompPlayerBtn').addClass('btn-inverse');
+      removeButtonClasses = function() {
+        $('#restartPlayerCompBtn').removeClass('btn-inverse');
+        $('#restartCompPlayerBtn').removeClass('btn-inverse');
+        return $('#restartCompCompBtn').removeClass('btn-inverse');
+      };
       $('#restartPlayerCompBtn').click(function() {
-        return view.restart(MODES.player_vs_comp);
+        view.restart(MODES.player_vs_comp);
+        removeButtonClasses();
+        return $(this).addClass('btn-inverse');
       });
       $('#restartCompPlayerBtn').click(function() {
-        return view.restart(MODES.comp_vs_player);
+        view.restart(MODES.comp_vs_player);
+        removeButtonClasses();
+        return $(this).addClass('btn-inverse');
       });
       return $('#restartCompCompBtn').click(function() {
-        return view.restart(MODES.comp_vs_comp);
+        view.restart(MODES.comp_vs_comp);
+        removeButtonClasses();
+        return $(this).addClass('btn-inverse');
       });
     });
   };

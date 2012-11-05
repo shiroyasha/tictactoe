@@ -6,12 +6,16 @@
 
         <title>Tic Tac Toe</title>
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" type='text/css' />
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" type='text/css' />
+        <!--<link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" type='text/css' />-->
         <link rel="stylesheet" href="css/style.css" type='text/css' />
 
+
+        <!-- jquery must be first -->
         <script src='js/jquery.js'></script>
+        <script type='text/javascript' src='bootstrap/js/bootstrap.js'></script>
         <script src='js/imgpreload.js'></script>
         <script src='js/rad.js'></script>
+
 
         <script language='javascript'>
             $( function() {
@@ -19,9 +23,10 @@
             });
         </script>
 
+
         <style>
 
-            #gameField {
+            #gameField, #testingField {
                 display: inline-block;
                 background-image: url('img/table.png') ;
                 width: 550px;
@@ -48,6 +53,11 @@
                 <!-- game tab -->
 
                 <div class="tab-pane active" id="game">
+                    <div class="alert alert-success">
+                        <strong>Tip!</strong> the goal of the game is to fill a whole row/column/diagonal with your mark. Filling is done
+                        by clicking on a field on the 3x3 grid. The result is a draw if neither of the players achive their goals.
+                    </div> 
+
                     <div class='row'>
                         <div class='span12 center'>
                             <canvas id='gameField' width=550px height=550px></canvas>
@@ -56,21 +66,86 @@
 
                     <div class='row'>
                         <div class='span12 center'>
-                            <input id='restartPlayerCompBtn' type='button' value='Player vs. Computer'/>
-                            <input id='restartCompPlayerBtn' type='button' value='Computer vs. Player'/>
-                            <input id='restartCompCompBtn' type='button' value='Computer vs. Computer'/>
+                            <input id='restartPlayerCompBtn' type='button' class='btn' value='Player vs. Computer'/>
+                            <input id='restartCompPlayerBtn' type='button' class='btn'value='Computer vs. Player'/>
+                            <input id='restartCompCompBtn' type='button' class='btn' value='Computer vs. Computer'/>
                         </div>
                     </div>
+                    <br />
+                    <div class="alert alert-info">
+                        <strong>Tip!</strong> By clicking on the above buttons you can choose the type of game you want to enjoy. The 
+                        first player always gets the mark 'X' and the other player gets the mark 'O'.
+                    </div> 
+
                 </div>
 
                 <!-- testing tab -->
 
                 <div class="tab-pane" id="testing">
-                    testing
+                    <div class='row'>
+
+                        <div class='span8 center'>
+                            <canvas id='testingField' width=550px height=550px></canvas>
+                        </div>
+
+                        <div class='span4'>
+                            <form>
+                                <fieldset>
+                                    <div>
+                                        <legend>Drawing</legend>
+
+                                         <label class="radio">
+                                            <input type="radio" name="drawingRadios" id="drawingRadiosX" value="option1" checked>
+                                            x
+                                        </label>
+
+                                        <label class="radio">
+                                            <input type="radio" name="drawingRadios" id="drawingRadiosO" value="option2">
+                                            o
+                                        </label>
+                                       
+                                    </div>
+
+                                    <div style='margin-top:30px' >
+                                        <legend>Settings</legend>
+
+                                        <label class="radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadiosX" value="option1" checked>
+                                            Best move for x
+                                        </label>
+
+                                        <label class="radio">
+                                            <input type="radio" name="optionsRadios" id="optionsRadiosO" value="option2">
+                                            Best move for o
+                                        </label>
+
+                                        
+                                        <br />
+
+                                        <label>Maximum depth for minimax search</label>
+                                        <input id='maxDepth' type="text" placeholder="Maximum depth..." data-mask="9" value=9>
+          
+                                        <button id='calculate' type="button" class="btn btn-primary">Calculate</button>
+                                        <button id='clearField' type="button" class="btn btn-danger">Clear Field</button>
+
+                                    </div>
+
+                                    <div style='margin-top:30px'>
+                                        <legend>Results</legend>
+
+                                        <div id='testResults'></div>
+
+                                    </div>
+
+                                </fieldset>
+
+                            </form>
+                        </div>
+
+                    </div>
+
                 </div>
-
             </div>
-
 
 
 
@@ -84,6 +159,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
     </body>
