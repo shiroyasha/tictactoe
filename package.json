@@ -3,7 +3,7 @@
 
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.5.x",
+    "express": "3.x",
     "ejs": "0.8.x"
   },
   "engines": {
