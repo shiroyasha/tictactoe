@@ -1,0 +1,13 @@
+{
+  "name": "tic-tac-toe",
+
+  "version": "0.0.1",
+  "dependencies": {
+    "express": "2.5.x",
+    "ejs": "0.8.x"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  }
+}
